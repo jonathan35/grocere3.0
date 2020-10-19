@@ -1,0 +1,63 @@
+#suPHP_ConfigPath /home/kuching3/public_html/beta
+DirectoryIndex index.htm index.html index.php
+Options -Indexes
+
+Header set X-XSS-Protection "1; mode=block"
+Header set X-Content-Type-Options nosniff
+Header always append X-Frame-Options SAMEORIGIN
+
+AddDefaultCharset UTF-8
+DefaultLanguage en-us
+
+#php_flag display_startup_errors on
+#php_flag display_errors off
+#php_flag html_errors on
+#php_flag log_errors on
+#php_value error_log  /home/hotelcom/grocere.com.my/errors.log
+
+
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE] 
+
+
+RewriteRule ^About-Us?$ page.php?i=YjNPTlNwMStMV0s4ZGV5QmFQY3Qrdz09
+RewriteRule ^Blog?$ page.php?i=YzU4YUQyV1JDNkFweEpqS0RJUUNaQT09
+RewriteRule ^Terms-of-Use?$ page.php?i=eEdKY0RXYW8zR3pUZCt4OUVvVi9vUT09
+RewriteRule ^Privacy-Policy?$ page.php?i=NG1NYnNKckw4QzRhOGhkT0M5NXNMUT09
+RewriteRule ^Contact-Us?$ page.php?i=Znc1TktyblRWZHk4VVFUZFZJQzhwdz09
+RewriteRule ^Help?$ page.php?i=SExqeDlCMnlXZFkrcU96aW5kMUpxZz09
+
+
+
+RewriteRule ^home?$ index.php [QSA,L]
+RewriteRule ^shopping?$ shopping_cart.php [QSA,L]
+RewriteRule ^checkout?$ checkout.php [QSA,L]
+
+
+RewriteRule ^dashboard?$ account_dashboard.php [QSA,L]
+RewriteRule ^thank_you?$ payment_return_page.php [QSA,L]
+RewriteRule ^empty_cart?$ empty_cart.php [QSA,L]
+RewriteRule ^detail?$ product_detail.php [QSA,L]
+
+RewriteRule ^the_order/([^/\.]+)?$ order_details.php?i=$1
+RewriteRule ^the_order/([^/\.]+)/([^/\.]+)?$ order_details.php?i=$1&t=$2
+RewriteRule ^the_order/([^/\.]+)/([^/\.]+)/staff?$ order_details.php?i=$1&t=$2&s=1
+
+RewriteRule ^refund?$ policy_refund.php
+RewriteRule ^see_direction?$ map.php
+
+RewriteRule ^signin?$ member_login.php
+RewriteRule ^signin/([^/\.]+)?$ member_login.php?auth_msg=$1
+RewriteRule ^signup?$ member_registration.php
+RewriteRule ^signout?$ logout.php
+RewriteRule ^forget?$ member_forget.php
+
+
+
+#RewriteRule ^panel?$ user_panel.php
+#RewriteRule ^profile?$ user_profile.php
+#RewriteRule ^contact_us?$ contact_us_page.php
+RewriteRule ^registration?$ member_registration.php
+RewriteRule ^registration/([^/\.]+)?$ member_registration.php?msg=$1
+
